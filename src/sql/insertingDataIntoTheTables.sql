@@ -164,7 +164,7 @@ VALUES
 
 
 -- Data that was inserted into the Project_DelieveryEmployee Table
-INSERT INTO Project_DeliveryEmployee (EmployeeID, ProjectID, IsCurrentlyWorking)
+INSERT INTO Project_DeliveryEmployee (EmployeeID, ProjectID)
 VALUES 
 	(21, 20),
 	(1, 11),
