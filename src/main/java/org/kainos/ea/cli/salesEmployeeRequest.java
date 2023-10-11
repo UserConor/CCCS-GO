@@ -3,55 +3,89 @@ package org.kainos.ea.cli;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
-public class CustomerRequest {
-    private int CustomerID;
-    private String Name;
-    private String Address;
-    private int Phone;
+public class salesEmployeeRequest {
+    private int SalesEmpID;
+    private String Forename;
+    private String Surname;
+    private BigDecimal Salary;
+    private String BAN;
+    private String NINumber;
+    private BigDecimal ComRate;
 
-    public int getCustomerID() {
-        return CustomerID;
+    public int getSalesEmpID() {
+        return SalesEmpID;
     }
 
-    public void setCustomerID(int customerID) {
-        CustomerID = customerID;
+    public void setSalesEmpID(int salesEmpID) {
+        SalesEmpID = salesEmpID;
     }
 
-    public String getName() {
-        return Name;
+    public String getForename() {
+        return Forename;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setForename(String forename) {
+        Forename = forename;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getSurname() {
+        return Surname;
     }
 
-    public void setAddress(String address) {
-        Address = address;
+    public void setSurname(String surname) {
+        Surname = surname;
     }
 
-    public int getPhone() {
-        return Phone;
+    public BigDecimal getSalary() {
+        return Salary;
     }
 
-    public void setPhone(int phone) {
-        Phone = phone;
+    public void setSalary(BigDecimal salary) {
+        Salary = salary;
     }
 
+    public String getBAN() {
+        return BAN;
+    }
+
+    public void setBAN(String BAN) {
+        this.BAN = BAN;
+    }
+
+    public String getNINumber() {
+        return NINumber;
+    }
+
+    public void setNINumber(String NINumber) {
+        this.NINumber = NINumber;
+    }
+
+    public BigDecimal getComRate() {
+        return ComRate;
+    }
+
+    public void setComRate(BigDecimal comRate) {
+        ComRate = comRate;
+    }
     @JsonCreator
-    public CustomerRequest(
-            @JsonProperty("CustomerID") int customerID,
-            @JsonProperty("Name") String name,
-            @JsonProperty("Address") String address,
-            @JsonProperty("Phone") int Phone) {
-        this.CustomerID = customerID;
-        this.Name = name;
-        this.Address = address;
-        this.Phone = Phone;
+    public salesEmployeeRequest(
+            @JsonProperty("SalesEmpID") int customerID,
+            @JsonProperty("Forname") String name,
+            @JsonProperty("Surname") String address,
+            @JsonProperty("Salary") BigDecimal Salary,
+            @JsonProperty("BAN") String BAN,
+            @JsonProperty("NINumber") String NINumber,
+            @JsonProperty("ComRate") BigDecimal ComRate )
+    {
+        this.SalesEmpID = SalesEmpID;
+        this.Forename = Forename;
+        this.Surname = Surname;
+        this.Salary = Salary;
+        this.BAN = BAN;
+        this.NINumber = NINumber;
+        this.ComRate = ComRate;
     }
+
 }

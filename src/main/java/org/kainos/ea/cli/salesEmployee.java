@@ -1,52 +1,85 @@
 package org.kainos.ea.cli;
 
-public class Customer implements Comparable<Customer>{
-    private int customerID;
-    private String name;
-    private String Address;
-    private int Phone;
+import java.math.BigDecimal;
 
-    public Customer(int customerID, String name, String Address, int Phone) {
-        this.customerID = customerID;
-        this.name = name;
-        this.Address = Address;
-        this.Phone = Phone;
+public class salesEmployee implements Comparable<salesEmployee>{
+    private int SalesEmpID;
+    private String Forename;
+    private String Surname;
+    private BigDecimal Salary;
+    private String BAN;
+    private String NINumber;
+    private BigDecimal ComRate;
+
+    public salesEmployee(int SalesEmpID, String Forename, String Surname,
+                         BigDecimal Salary, String BAN, String NINumber, BigDecimal ComRate) {
+        this.SalesEmpID = SalesEmpID;
+        this.Forename = Forename;
+        this.Surname = Surname;
+        this.Salary = Salary;
+        this.BAN = BAN;
+        this.NINumber = NINumber;
+        this.ComRate = ComRate;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getSalesEmpID() {
+        return SalesEmpID;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setSalesEmpID(int salesEmpID) {
+        SalesEmpID = salesEmpID;
     }
 
-    public String getName() {
-        return name;
+    public String getForename() {
+        return Forename;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setForename(String forename) {
+        Forename = forename;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getSurname() {
+        return Surname;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setSurname(String surname) {
+        Surname = surname;
     }
 
-    public int getPhone() {
-        return Phone;
+    public BigDecimal getSalary() {
+        return Salary;
     }
 
-    public void setPhone(int Phone) {
-        this.Phone = Phone;
+    public void setSalary(BigDecimal salary) {
+        Salary = salary;
+    }
+
+    public String getBAN() {
+        return BAN;
+    }
+
+    public void setBAN(String BAN) {
+        this.BAN = BAN;
+    }
+
+    public String getNINumber() {
+        return NINumber;
+    }
+
+    public void setNINumber(String NINumber) {
+        this.NINumber = NINumber;
+    }
+
+    public BigDecimal getComRate() {
+        return ComRate;
+    }
+
+    public void setComRate(BigDecimal comRate) {
+        ComRate = comRate;
     }
 
     @Override
-    public int compareTo(Customer customer) {
+    public int compareTo(salesEmployee o) {
         return 0;
     }
 }
