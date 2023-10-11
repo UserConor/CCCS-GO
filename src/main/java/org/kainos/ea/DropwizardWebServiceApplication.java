@@ -5,8 +5,12 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+<<<<<<< HEAD
 import org.kainos.ea.resources.ClientController;
 import org.kainos.ea.resources.ProjectController;
+=======
+import org.kainos.ea.resources.SalesEmployeeController;
+>>>>>>> salesEmployeeBranch2
 
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
 

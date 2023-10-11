@@ -10,16 +10,16 @@ public class SalesEmployeeDAO {
     public int createSalesEmployee(SalesEmployeeRequest salesEmployee) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO SalesEmployee (Forename, Surname, Salary, BAN, NINumber, ComRate) VALUES (?,?,?,?,?,?)";
+        String insertStatement = "INSERT INTO SalesEmployee (Forename, Surname, Salary, BankNum, NINum, ComRate) VALUES (?,?,?,?,?,?)";
 
         PreparedStatement statement = connection.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
         statement.setString(1, salesEmployee.getForename());
-        statement.setString(1, salesEmployee.getSurname());
-        statement.setBigDecimal(1, salesEmployee.getSalary());
-        statement.setString(1, salesEmployee.getBAN());
-        statement.setString(1, salesEmployee.getNINumber());
-        statement.setBigDecimal(1, salesEmployee.getComRate());
+        statement.setString(2, salesEmployee.getSurname());
+        statement.setBigDecimal(3, salesEmployee.getSalary());
+        statement.setString(4, salesEmployee.getBAN());
+        statement.setString(5, salesEmployee.getNINumber());
+        statement.setBigDecimal(6, salesEmployee.getComRate());
 
         statement.executeUpdate();
 
@@ -36,7 +36,7 @@ public class SalesEmployeeDAO {
 
         Statement statement = connection.createStatement();
 
-        ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BAN, NINumber, ComRate" +
+        ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate" +
                 " FROM SalesEmployee where SalesEmpID = " + id);
 
         while (resultSet.next()) {
@@ -45,8 +45,8 @@ public class SalesEmployeeDAO {
                     resultSet.getString("Forename"),
                     resultSet.getString("Surname"),
                     resultSet.getBigDecimal("Salary"),
-                    resultSet.getString("BAN"),
-                    resultSet.getString("NINumber"),
+                    resultSet.getString("BankNum"),
+                    resultSet.getString("NINum"),
                     resultSet.getBigDecimal("ComRate")
             );
         }
