@@ -22,7 +22,7 @@ public class SalesEmployeeController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createSalesEmployee(SalesEmployeeRequest salesEmployeeRequest) {
         try {
-            return Response.ok(salesEmployeeService.createOrder(salesEmployeeRequest)).build();
+            return Response.ok(salesEmployeeService.createSalesEmployee(salesEmployeeRequest)).build();
         }
         catch (FailedToCreateSalesEmployeeException e) {
             System.err.println(e.getMessage());

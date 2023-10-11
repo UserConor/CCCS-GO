@@ -13,7 +13,7 @@ public class SalesEmployeeService {
 
     SalesEmployeeValidator salesEmployeeValidator = new SalesEmployeeValidator();
 
-    public int createOrder(SalesEmployeeRequest salesEmployeeRequest)
+    public int createSalesEmployee(SalesEmployeeRequest salesEmployeeRequest)
             throws FailedToCreateSalesEmployeeException, InvalidSalesEmployeeException {
         try {
             String validation = salesEmployeeValidator.isValidSalesEmployee(salesEmployeeRequest);
