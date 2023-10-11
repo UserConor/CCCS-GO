@@ -36,7 +36,7 @@ public class SalesEmployeeDAO {
 
         Statement statement = connection.createStatement();
 
-        ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BAN, NINumber, ComRate" +
+        ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate" +
                 " FROM SalesEmployee where SalesEmpID = " + id);
 
         while (resultSet.next()) {
@@ -45,8 +45,8 @@ public class SalesEmployeeDAO {
                     resultSet.getString("Forename"),
                     resultSet.getString("Surname"),
                     resultSet.getBigDecimal("Salary"),
-                    resultSet.getString("BAN"),
-                    resultSet.getString("NINumber"),
+                    resultSet.getString("BankNum"),
+                    resultSet.getString("NINum"),
                     resultSet.getBigDecimal("ComRate")
             );
         }

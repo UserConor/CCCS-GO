@@ -1,8 +1,11 @@
 package org.kainos.ea.api;
 
+import org.kainos.ea.cli.SalesEmployee;
 import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.client.FailedToCreateSalesEmployeeException;
+import org.kainos.ea.client.FailedToGetSalesEmployeeException;
 import org.kainos.ea.client.InvalidSalesEmployeeException;
+import org.kainos.ea.client.SalesEmployeeDoesNotExistException;
 import org.kainos.ea.core.SalesEmployeeValidator;
 import org.kainos.ea.db.SalesEmployeeDAO;
 
@@ -34,6 +37,24 @@ public class SalesEmployeeService {
             System.err.println(e.getMessage());
 
             throw new FailedToCreateSalesEmployeeException();
+        }
+    }
+
+    public SalesEmployee getSalesEmployeeById(int id)
+            throws FailedToGetSalesEmployeeException, SalesEmployeeDoesNotExistException {
+        try {
+            SalesEmployee salesEmployee = salesEmployeeDAO.getSalesEmployeeByID(id);
+
+            if (salesEmployee == null) {
+                throw new SalesEmployeeDoesNotExistException();
+            }
+
+            return salesEmployee;
+        }
+        catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToGetSalesEmployeeException();
         }
     }
 }
