@@ -6,7 +6,7 @@ USE SoniakBewWFM_CharlesM;
 -- Data that was inserted into the DeliveryEmployee Table
 INSERT INTO DeliveryEmployee (Forename, Surname, Salary, BankNum, NINum)
 VALUES 
-	('Olivia', 'Smith', 26500.00, 'GB12ABCD1234567890', 'AB123456C'),
+    ('Olivia', 'Smith', 26500.00, 'GB12ABCD1234567890', 'AB123456C'),
     ('James', 'Brown', 27000.00, 'GB34EFGH2345678901', 'CD234567E'),
     ('Emily', 'Taylor', 25500.00, 'GB56IJKL3456789012', 'EF345678F'),
     ('Liam', 'Wilson', 27000.00, 'GB78MNOP4567890123', 'GH456789G'),
@@ -138,7 +138,7 @@ VALUES
 -- Data that was inserted into the Project Table
 INSERT INTO Project (ProjectName, ProjectValue, ClientID, TechLeadID)
 VALUES
-	('Secure Cloud Migration', 175000.00, 2, 30),
+    ('Secure Cloud Migration', 175000.00, 2, 30),
     ('IoT Smart Home Integration', 125000.50, 4, 2),
     ('Blockchain Supply Chain', 250000.75, 3, 5),
     ('AI-Powered Customer Support', 85000.25, 1, 23),
