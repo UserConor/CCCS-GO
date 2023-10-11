@@ -37,7 +37,7 @@ public class SalesEmployeeDAO {
         Statement statement = connection.createStatement();
 
         ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BAN, NINumber, ComRate" +
-                " FROM SalesEmployee where SalesEmpID =" + id);
+                " FROM SalesEmployee where SalesEmpID = " + id);
 
         while (resultSet.next()) {
             return new salesEmployee(
