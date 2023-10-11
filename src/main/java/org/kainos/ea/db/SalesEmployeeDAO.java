@@ -1,13 +1,13 @@
 package org.kainos.ea.db;
 
 import java.sql.*;
-import org.kainos.ea.cli.salesEmployeeRequest;
-import org.kainos.ea.cli.salesEmployee;
+import org.kainos.ea.cli.SalesEmployeeRequest;
+import org.kainos.ea.cli.SalesEmployee;
 
 public class SalesEmployeeDAO {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-    public int createSalesEmployee(salesEmployeeRequest salesEmployee) throws SQLException {
+    public int createSalesEmployee(SalesEmployeeRequest salesEmployee) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
         String insertStatement = "INSERT INTO SalesEmployee (Forename, Surname, Salary, BAN, NINumber, ComRate) VALUES (?,?,?,?,?,?)";
@@ -31,7 +31,7 @@ public class SalesEmployeeDAO {
         return -1;
     }
 
-    public salesEmployee getSalesEmployeeByID(int id) throws SQLException {
+    public SalesEmployee getSalesEmployeeByID(int id) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
         Statement statement = connection.createStatement();
@@ -40,7 +40,7 @@ public class SalesEmployeeDAO {
                 " FROM SalesEmployee where SalesEmpID = " + id);
 
         while (resultSet.next()) {
-            return new salesEmployee(
+            return new SalesEmployee(
                     resultSet.getInt("SalesEmpID"),
                     resultSet.getString("Forename"),
                     resultSet.getString("Surname"),

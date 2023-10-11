@@ -1,8 +1,11 @@
 package org.kainos.ea.cli;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 
-public class salesEmployee implements Comparable<salesEmployee>{
+public class SalesEmployeeRequest {
     private int SalesEmpID;
     private String Forename;
     private String Surname;
@@ -10,17 +13,6 @@ public class salesEmployee implements Comparable<salesEmployee>{
     private String BAN;
     private String NINumber;
     private BigDecimal ComRate;
-
-    public salesEmployee(int SalesEmpID, String Forename, String Surname,
-                         BigDecimal Salary, String BAN, String NINumber, BigDecimal ComRate) {
-        this.SalesEmpID = SalesEmpID;
-        this.Forename = Forename;
-        this.Surname = Surname;
-        this.Salary = Salary;
-        this.BAN = BAN;
-        this.NINumber = NINumber;
-        this.ComRate = ComRate;
-    }
 
     public int getSalesEmpID() {
         return SalesEmpID;
@@ -77,9 +69,23 @@ public class salesEmployee implements Comparable<salesEmployee>{
     public void setComRate(BigDecimal comRate) {
         ComRate = comRate;
     }
-
-    @Override
-    public int compareTo(salesEmployee o) {
-        return 0;
+    @JsonCreator
+    public SalesEmployeeRequest(
+            @JsonProperty("SalesEmpID") int customerID,
+            @JsonProperty("Forname") String name,
+            @JsonProperty("Surname") String address,
+            @JsonProperty("Salary") BigDecimal Salary,
+            @JsonProperty("BAN") String BAN,
+            @JsonProperty("NINumber") String NINumber,
+            @JsonProperty("ComRate") BigDecimal ComRate )
+    {
+        this.SalesEmpID = SalesEmpID;
+        this.Forename = Forename;
+        this.Surname = Surname;
+        this.Salary = Salary;
+        this.BAN = BAN;
+        this.NINumber = NINumber;
+        this.ComRate = ComRate;
     }
+
 }
