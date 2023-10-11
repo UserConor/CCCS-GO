@@ -1,12 +1,12 @@
 package org.kainos.ea.db;
 
 import java.sql.*;
-import org.kainos.ea.cli.salesEmployeeRequest;
+import org.kainos.ea.cli.SalesEmployeeRequest;
 
 public class SalesEmployeeDAO {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-    public int createSalesEmployee(salesEmployeeRequest salesEmployee) throws SQLException {
+    public int createSalesEmployee(SalesEmployeeRequest salesEmployee) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
         String insertStatement = "INSERT INTO SalesEmployee  (Forename, Surname, Salary, BAN, NINumber, ComRate) VALUES (?,?,?,?,?,?)";
