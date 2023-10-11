@@ -33,7 +33,7 @@ CREATE TABLE Project (
 	ProjectValue decimal(9,2) NOT NULL,
 	ClientID int,
 	TechLeadID int NOT NULL,
-	IsCompleted tinyint CHECK (IsCompleted = 0 OR isCompleted = 1) DEFAULT 0,
+	IsCompleted tinyint CHECK (IsCompleted = 0 OR IsCompleted = 1) DEFAULT 0,
 	CONSTRAINT FOREIGN KEY (ClientID) REFERENCES `Client`(ClientID),
 	CONSTRAINT FOREIGN KEY (TechLeadID) REFERENCES DeliveryEmployee(DEmpID)
 );
