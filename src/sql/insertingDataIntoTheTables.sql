@@ -113,7 +113,7 @@ VALUES
 
 
 -- Data that was inserted into the Client Table
-INSERT INTO Client (Forename, Surename, SalesEmpID)
+INSERT INTO Client (Forename, Surname, SalesEmpID)
 VALUES 
     ('Alice', 'Smith', 3),
     ('James', 'Brown', 34),
