@@ -2,7 +2,7 @@ package org.kainos.ea.cli;
 
 import java.math.BigDecimal;
 
-public class SalesEmployee implements Comparable<SalesEmployee>{
+public class SalesEmployee {
     private int SalesEmpID;
     private String Forename;
     private String Surname;
@@ -76,10 +76,5 @@ public class SalesEmployee implements Comparable<SalesEmployee>{
 
     public void setComRate(BigDecimal comRate) {
         ComRate = comRate;
-    }
-
-    @Override
-    public int compareTo(SalesEmployee o) {
-        return 0;
     }
 }
