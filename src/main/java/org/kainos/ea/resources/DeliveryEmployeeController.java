@@ -10,7 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api("Engineering Acadamey Dropwizard Product API.")
+@Api("Dropwizard Delivery Employee API")
 @Path("/api")
 public class DeliveryEmployeeController {
 
