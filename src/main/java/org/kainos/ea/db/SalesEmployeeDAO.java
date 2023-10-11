@@ -2,6 +2,7 @@ package org.kainos.ea.db;
 
 import java.sql.*;
 import org.kainos.ea.cli.salesEmployeeRequest;
+import org.kainos.ea.cli.salesEmployee;
 
 public class SalesEmployeeDAO {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -9,7 +10,7 @@ public class SalesEmployeeDAO {
     public int createSalesEmployee(salesEmployeeRequest salesEmployee) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO SalesEmployee  (Forename, Surname, Salary, BAN, NINumber, ComRate) VALUES (?,?,?,?,?,?)";
+        String insertStatement = "INSERT INTO SalesEmployee (Forename, Surname, Salary, BAN, NINumber, ComRate) VALUES (?,?,?,?,?,?)";
 
         PreparedStatement statement = connection.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
 
@@ -30,4 +31,25 @@ public class SalesEmployeeDAO {
         return -1;
     }
 
+    public salesEmployee getSalesEmployeeByID(int id) throws SQLException {
+        Connection connection = databaseConnector.getConnection();
+
+        Statement statement = connection.createStatement();
+
+        ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BAN, NINumber, ComRate" +
+                " FROM SalesEmployee where SalesEmpID =" + id);
+
+        while (resultSet.next()) {
+            return new salesEmployee(
+                    resultSet.getInt("SalesEmpID"),
+                    resultSet.getString("Forename"),
+                    resultSet.getString("Surname"),
+                    resultSet.getBigDecimal("Salary"),
+                    resultSet.getString("BAN"),
+                    resultSet.getString("NINumber"),
+                    resultSet.getBigDecimal("ComRate")
+            );
+        }
+        return null;
+    }
 }
