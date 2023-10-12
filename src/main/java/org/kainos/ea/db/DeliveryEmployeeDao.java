@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.kainos.ea.cli.DeliveryEmployeeRequest;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,5 +60,29 @@ public class DeliveryEmployeeDao {
         }
 
         return null;
+    }
+
+    public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        String insertStatement = "INSERT INTO DeliveryEmployee (Forename, Surname, Salary, BankNum, NINum) VALUES (?,?,?,?,?)";
+
+        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+
+        st.setString(1, deliveryEmployee.getForename());
+        st.setString(2, deliveryEmployee.getSurname());
+        st.setDouble(3, deliveryEmployee.getSalary());
+        st.setString(4, deliveryEmployee.getBankNum());
+        st.setString(5, deliveryEmployee.getNINum());
+
+        st.executeUpdate();
+
+        ResultSet rs = st.getGeneratedKeys();
+
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+
+        return -1;
     }
 }
