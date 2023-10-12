@@ -92,6 +92,6 @@ public class DeliveryEmployeeDao {
 
         st.setInt(1, id);
 
-        st.executeUpdate()
+        st.executeUpdate();
     }
 }

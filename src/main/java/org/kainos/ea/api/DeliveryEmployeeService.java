@@ -71,7 +71,7 @@ public class DeliveryEmployeeService {
         try {
             DeliveryEmployee deliveryEmployeeToDelete = deliveryEmployeeDao.getDeliveryEmployeeById(id);
 
-            if (deilveryEmployeeToDelete == null) {
+            if (deliveryEmployeeToDelete == null) {
                 throw new DeliveryEmployeeDoesNotExistException();
             }
 
