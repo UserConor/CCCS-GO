@@ -19,7 +19,7 @@ public class DeliveryEmployeeController {
         private DeliveryEmployeeService deliveryEmployeeService = new DeliveryEmployeeService();
 
         @GET
-        @Path("/deliveryemployees")
+        @Path("/delivery-employees")
         @Produces(MediaType.APPLICATION_JSON)
         public Response getAllDeliveryEmployees() {
             try {
@@ -33,7 +33,7 @@ public class DeliveryEmployeeController {
 
 
     @GET
-    @Path("/deliveryemployees/{id}")
+    @Path("/delivery-employees/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDeliveryEmployeeById(@PathParam("id") int id) {
         try {
