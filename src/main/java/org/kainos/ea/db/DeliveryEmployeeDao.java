@@ -87,6 +87,7 @@ public class DeliveryEmployeeDao {
         return -1;
     }
 
+
     public void updateDeliveryEmployee(int id, DeliveryEmployeeUpdateRequest deliveryEmployeeUpdate) throws SQLException {
         Connection c = databaseConnector.getConnection();
 
@@ -99,6 +100,16 @@ public class DeliveryEmployeeDao {
         st.setDouble(3, deliveryEmployeeUpdate.getSalary());
         st.setString(4, deliveryEmployeeUpdate.getBankNum());
         st.setInt(5, id);
+    }
+
+    public void deleteDeliveryEmployee(int id) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        String deleteStatement = "DELETE FROM DeliveryEmployee WHERE DEmpID = ?";
+
+        PreparedStatement st = c.prepareStatement(deleteStatement);
+
+        st.setInt(1, id);
 
         st.executeUpdate();
     }

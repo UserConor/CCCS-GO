@@ -66,6 +66,7 @@ public class DeliveryEmployeeService {
         }
     }
 
+  
     public void updateDeliveryEmployee(int id, DeliveryEmployeeUpdateRequest deliveryEmployeeUpdate) throws InvalidDeliveryEmployeeException, FailedToUpdateDeliveryEmployeeException, DeliveryEmployeeDoesNotExistException {
         try {
             String validation = deliveryEmployeeValidator.isValidDeliveryEmployeeUpdate(deliveryEmployeeUpdate);
@@ -85,6 +86,24 @@ public class DeliveryEmployeeService {
             System.err.println(e.getMessage());
 
             throw new FailedToUpdateDeliveryEmployeeException();
+        }
+    }
+
+
+    public void deleteDeliveryEmployee(int id) throws DeliveryEmployeeDoesNotExistException, FailedToDeleteDeliveryEmployeeException {
+        try {
+            DeliveryEmployee deliveryEmployeeToDelete = deliveryEmployeeDao.getDeliveryEmployeeById(id);
+
+            if (deliveryEmployeeToDelete == null) {
+                throw new DeliveryEmployeeDoesNotExistException();
+            }
+
+            deliveryEmployeeDao.deleteDeliveryEmployee(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToDeleteDeliveryEmployeeException();
+
         }
     }
 }

@@ -21,20 +21,20 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class DeliveryEmployeeController {
 
-        private DeliveryEmployeeService deliveryEmployeeService = new DeliveryEmployeeService();
+    private DeliveryEmployeeService deliveryEmployeeService = new DeliveryEmployeeService();
 
-        @GET
-        @Path("/delivery-employees")
-        @Produces(MediaType.APPLICATION_JSON)
-        public Response getAllDeliveryEmployees() {
-            try {
-                return Response.ok(deliveryEmployeeService.getAllDeliveryEmployees()).build();
-            } catch (FailedToGetDeliveryEmployeesException e) {
-                System.err.println(e.getMessage());
+    @GET
+    @Path("/delivery-employees/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllDeliveryEmployees() {
+       try {
+           return Response.ok(deliveryEmployeeService.getAllDeliveryEmployees()).build();
+       } catch (FailedToGetDeliveryEmployeesException e) {
+           System.err.println(e.getMessage());
 
-                return Response.serverError().build();
-            }
-        }
+           return Response.serverError().build();
+       }
+    }
 
 
     @GET
@@ -68,7 +68,26 @@ public class DeliveryEmployeeController {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
 
+
+    @DELETE
+    @Path("/delivery-employees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteProduct(@PathParam("id") int id) {
+        try {
+            deliveryEmployeeService.deleteDeliveryEmployee(id);
+
+            return Response.ok().build();
+        } catch (DeliveryEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FailedToDeleteDeliveryEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
         }
     }
 
