@@ -2,10 +2,7 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
-import org.kainos.ea.client.DeliveryEmployeeDoesNotExistException;
-import org.kainos.ea.client.FailedToCreateDeliveryEmployeeException;
-import org.kainos.ea.client.FailedToGetDeliveryEmployeesException;
-import org.kainos.ea.client.InvalidDeliveryEmployeeException;
+import org.kainos.ea.client.*;
 import org.kainos.ea.core.DeliveryEmployeeValidator;
 import org.kainos.ea.db.DeliveryEmployeeDao;
 
@@ -64,6 +61,23 @@ public class DeliveryEmployeeService {
             System.err.println(e.getMessage());
 
             throw new FailedToCreateDeliveryEmployeeException();
+        }
+    }
+
+
+    public void deleteDeliveryEmployee(int id) throws DeliveryEmployeeDoesNotExistException, FailedToDeleteDeliveryEmployeeException {
+        try {
+            DeliveryEmployee deliveryEmployeeToDelete = deliveryEmployeeDao.getDeliveryEmployeeById(id);
+
+            if (deliveryEmployeeToDelete == null) {
+                throw new DeliveryEmployeeDoesNotExistException();
+            }
+
+            deliveryEmployeeDao.deleteDeliveryEmployee(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToDeleteDeliveryEmployeeException();
         }
     }
 }

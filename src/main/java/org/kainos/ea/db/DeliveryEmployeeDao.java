@@ -85,4 +85,17 @@ public class DeliveryEmployeeDao {
 
         return -1;
     }
+
+
+    public void deleteDeliveryEmployee(int id) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        String deleteStatement = "DELETE FROM DeliveryEmployee WHERE DEmpID = ?";
+
+        PreparedStatement st = c.prepareStatement(deleteStatement);
+
+        st.setInt(1, id);
+
+        st.executeUpdate();
+    }
 }
