@@ -3,10 +3,8 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.DeliveryEmployeeService;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
-import org.kainos.ea.client.DeliveryEmployeeDoesNotExistException;
-import org.kainos.ea.client.FailedToCreateDeliveryEmployeeException;
-import org.kainos.ea.client.FailedToGetDeliveryEmployeesException;
-import org.kainos.ea.client.InvalidDeliveryEmployeeException;
+import org.kainos.ea.cli.DeliveryEmployeeUpdateRequest;
+import org.kainos.ea.client.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -51,7 +49,7 @@ public class DeliveryEmployeeController {
 
 
     @POST
-    @Path("/deliveryemployees")
+    @Path("/deliveryemployees/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) {
         try {
@@ -67,4 +65,24 @@ public class DeliveryEmployeeController {
 
         }
     }
+
+    @PUT
+    @Path("/deliveryemployess/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateProduct(@PathParam("id") int id, DeliveryEmployeeUpdateRequest deliveryEmployeeUpdate) {
+        try{
+            deliveryEmployeeService.updateDeliveryEmployee(id, deliveryEmployeeUpdate);
+
+            return Response.ok().build();
+        } catch (InvalidDeliveryEmployeeException | DeliveryEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FailedToUpdateDeliveryEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+    }
+
 }
