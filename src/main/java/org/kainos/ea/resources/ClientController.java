@@ -18,8 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Api("Dropwizard Client API")
 @Path("/api")
@@ -35,12 +34,43 @@ public class ClientController {
         try {
             List<ClientOutput> clientOutputList = new ArrayList<>();
             for (Client client: clientService.getAllClients()) {
-                SalesEmployee salesEmployee = salesEmployeeService.getSalesEmployeeById(client.getSalesEmpId());
-                List<Project> projectList = projectService.getAllProjectsWithClient(client.getClientId());
-                ClientOutput clientOutput = new ClientOutput(client, salesEmployee, projectList);
-                clientOutputList.add(clientOutput);
+                clientOutputList.add(
+                        client.getClientOutput(salesEmployeeService, projectService));
             }
             return Response.ok(clientOutputList).build();
+        } catch (FailedToGetClientsException | FailedToGetProjectsException |
+                 FailedToGetSalesEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        } catch (SalesEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
+
+    @GET
+    @Path("/clients-highest-value")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getClientOfHighestValue() {
+        try {
+            HashMap<Client, Float> clientToTotalProjectValue = new HashMap<>();
+            List<Client> clients = clientService.getAllClients();
+            for (Client client: clients) {
+                float totalProjectValue = 0;
+                List<Project> projects = projectService.getAllProjectsWithClient(client.getClientId());
+                for (Project project: projects) {
+                    totalProjectValue += project.getProjectValue();
+                }
+                clientToTotalProjectValue.put(client, totalProjectValue);
+            }
+
+            Client clientOfHighestValue = Collections.max(clientToTotalProjectValue.entrySet(), Map.Entry.comparingByValue()).getKey();
+
+            return Response.ok(
+                    clientOfHighestValue.getClientOutput(salesEmployeeService, projectService))
+                    .build();
         } catch (FailedToGetClientsException | FailedToGetProjectsException |
                  FailedToGetSalesEmployeeException e) {
             System.err.println(e.getMessage());
