@@ -27,13 +27,7 @@ public class ClientService {
         List<ClientOutput> clientOutputList = null;
 
         try {
-            clientOutputList = new ArrayList<>();
-            for (Client client: clientDao.getAllClients()) {
-                SalesEmployee salesEmployee = salesEmployeeService.getSalesEmployeeById(client.getSalesEmpId());
-                List<Project> projectList = projectService.getAllProjectsWithClient(client.getClientId());
-                ClientOutput clientOutput = new ClientOutput(client, salesEmployee, projectList);
-                clientOutputList.add(clientOutput);
-            }
+            clientOutputList = clientDao.getAllClientsInfo();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
 
