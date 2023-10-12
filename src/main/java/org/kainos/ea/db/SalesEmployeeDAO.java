@@ -96,4 +96,15 @@ public class SalesEmployeeDAO {
         }
         return salesEmployeeList;
     }
+    public void deleteSalesEmployee(int id) throws SQLException {
+        Connection connection = databaseConnector.getConnection();
+
+        String deleteStatement = "DELETE FROM SalesEmployee WHERE SalesEmpID = ?";
+
+        PreparedStatement statement = connection.prepareStatement(deleteStatement);
+
+        statement.setInt(1,id);
+
+        statement.executeUpdate();
+    }
 }
