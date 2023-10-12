@@ -1,5 +1,13 @@
 package org.kainos.ea.cli;
 
+import org.kainos.ea.api.ProjectService;
+import org.kainos.ea.api.SalesEmployeeService;
+import org.kainos.ea.client.FailedToGetProjectsException;
+import org.kainos.ea.client.FailedToGetSalesEmployeeException;
+import org.kainos.ea.client.SalesEmployeeDoesNotExistException;
+
+import java.util.List;
+
 public class Client {
     private int clientId;
     private String forename;
@@ -43,5 +51,17 @@ public class Client {
 
     public void setSalesEmpId(int salesEmpId) {
         this.salesEmpId = salesEmpId;
+    }
+
+    public ClientOutput getClientOutput(
+            SalesEmployeeService salesEmployeeService,
+            ProjectService projectService
+    )
+            throws SalesEmployeeDoesNotExistException,
+            FailedToGetSalesEmployeeException,
+            FailedToGetProjectsException {
+        SalesEmployee salesEmployee = salesEmployeeService.getSalesEmployeeById(this.getSalesEmpId());
+        List<Project> projectList = projectService.getAllProjectsWithClient(this.getClientId());
+        return new ClientOutput(this, salesEmployee, projectList);
     }
 }
