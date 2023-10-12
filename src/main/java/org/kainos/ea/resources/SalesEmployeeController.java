@@ -83,6 +83,7 @@ public class SalesEmployeeController {
             return  Response.serverError().build();
         }
     }
+
     @DELETE
     @Path("/delete-sales-employee/{id}")
     @Produces(MediaType.APPLICATION_JSON)

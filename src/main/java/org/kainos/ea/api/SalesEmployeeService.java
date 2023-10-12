@@ -86,6 +86,7 @@ public class SalesEmployeeService {
 
         return salesEmployeeList;
     }
+  
     public void deleteSalesEmployee(int id) throws SalesEmployeeDoesNotExistException, FailedToDeleteSalesEmployeeException {
         try {
             SalesEmployee employeeToDelete = salesEmployeeDAO.getSalesEmployeeByID(id);
