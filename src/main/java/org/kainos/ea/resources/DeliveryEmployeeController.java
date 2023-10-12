@@ -2,11 +2,18 @@ package org.kainos.ea.resources;
 
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.DeliveryEmployeeService;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
 import org.kainos.ea.cli.DeliveryEmployeeUpdateRequest;
 import org.kainos.ea.client.*;
 
 import javax.ws.rs.*;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -46,7 +53,6 @@ public class DeliveryEmployeeController {
             return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), "Delivery employee does not exist").build();
         }
     }
-
 
     @POST
     @Path("/delivery-employees/")

@@ -12,7 +12,6 @@ import java.util.List;
 
 public class DeliveryEmployeeService {
     private DeliveryEmployeeDao deliveryEmployeeDao = new DeliveryEmployeeDao();
-
     private DeliveryEmployeeValidator deliveryEmployeeValidator = new DeliveryEmployeeValidator();
 
     public List<DeliveryEmployee> getAllDeliveryEmployees() throws FailedToGetDeliveryEmployeesException {
@@ -44,7 +43,7 @@ public class DeliveryEmployeeService {
         }
     }
 
-
+  
     public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws InvalidDeliveryEmployeeException, FailedToCreateDeliveryEmployeeException, InvalidDeliveryEmployeeException {
         try {
             String validation = deliveryEmployeeValidator.isValidDeliveryEmployee(deliveryEmployee);
