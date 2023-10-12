@@ -5,10 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import org.kainos.ea.resources.ClientController;
-import org.kainos.ea.resources.ProjectController;
-import org.kainos.ea.resources.DeliveryEmployeeController;
-import org.kainos.ea.resources.SalesEmployeeController;
+import org.kainos.ea.resources.*;
 
 public class DropwizardWebServiceApplication extends Application<DropwizardWebServiceConfiguration> {
 
@@ -38,6 +35,7 @@ public class DropwizardWebServiceApplication extends Application<DropwizardWebSe
         environment.jersey().register(new ProjectController());
         environment.jersey().register(new DeliveryEmployeeController());
         environment.jersey().register(new SalesEmployeeController());
+        environment.jersey().register(new ProjectDeliveryEmployeeController());
     }
 
 }

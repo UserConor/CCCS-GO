@@ -2,7 +2,6 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.Client;
 import org.kainos.ea.cli.Project;
-import org.kainos.ea.cli.ProjectRequest;
 import org.kainos.ea.cli.ProjectRequestClient;
 import org.kainos.ea.client.*;
 import org.kainos.ea.db.ClientDao;
