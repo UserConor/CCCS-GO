@@ -73,12 +73,13 @@ public class SalesEmployeeDAO {
 
         s.executeUpdate();
     }
+
     public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
-        Statement s = connection.createStatement();
+        Statement statement = connection.createStatement();
 
-        ResultSet rs = s.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate FROM SalesEmployee");
+        ResultSet rs = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate FROM SalesEmployee");
 
         List<SalesEmployee> salesEmployeeList = new ArrayList<>();
 
@@ -91,31 +92,6 @@ public class SalesEmployeeDAO {
                     rs.getString("BankNum"),
                     rs.getString("NINum"),
                     rs.getBigDecimal("ComRate")
-            );
-
-            salesEmployeeList.add(salesEmployee);
-        }
-        return salesEmployeeList;
-    }
-
-    public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
-        Connection connection = databaseConnector.getConnection();
-
-        Statement statement = connection.createStatement();
-
-        ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate FROM SalesEmployee");
-
-        List<SalesEmployee> salesEmployeeList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            SalesEmployee salesEmployee = new SalesEmployee(
-                    resultSet.getInt("SalesEmpID"),
-                    resultSet.getString("Forename"),
-                    resultSet.getString("Surname"),
-                    resultSet.getBigDecimal("Salary"),
-                    resultSet.getString("BankNum"),
-                    resultSet.getString("NINum"),
-                    resultSet.getBigDecimal("ComRate")
             );
 
             salesEmployeeList.add(salesEmployee);
