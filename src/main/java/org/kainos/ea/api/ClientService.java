@@ -9,8 +9,6 @@ import org.kainos.ea.client.FailedToGetProjectsException;
 import org.kainos.ea.client.FailedToGetSalesEmployeeException;
 import org.kainos.ea.client.SalesEmployeeDoesNotExistException;
 import org.kainos.ea.db.ClientDao;
-import org.kainos.ea.db.ProjectDao;
-import org.kainos.ea.db.SalesEmployeeDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

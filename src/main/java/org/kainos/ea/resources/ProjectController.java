@@ -2,7 +2,6 @@ package org.kainos.ea.resources;
 
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.ProjectService;
-import org.kainos.ea.client.FailedToGetClientsException;
 import org.kainos.ea.client.FailedToGetProjectsException;
 
 import javax.ws.rs.GET;

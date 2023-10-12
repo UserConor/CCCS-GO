@@ -1,7 +1,6 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.Project;
-import org.kainos.ea.client.FailedToGetClientsException;
 import org.kainos.ea.client.FailedToGetProjectsException;
 import org.kainos.ea.db.ProjectDao;
 

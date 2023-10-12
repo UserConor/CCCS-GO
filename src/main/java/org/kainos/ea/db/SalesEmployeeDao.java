@@ -1,10 +1,11 @@
 package org.kainos.ea.db;
 
-import java.sql.*;
-import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.cli.SalesEmployee;
+import org.kainos.ea.cli.SalesEmployeeRequest;
 
-public class SalesEmployeeDAO {
+import java.sql.*;
+
+public class SalesEmployeeDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
 
     public int createSalesEmployee(SalesEmployeeRequest salesEmployee) throws SQLException {
@@ -31,7 +32,7 @@ public class SalesEmployeeDAO {
         return -1;
     }
 
-    public SalesEmployee getSalesEmployeeByID(int id) throws SQLException {
+    public SalesEmployee getSalesEmployeeById(int id) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
         Statement statement = connection.createStatement();
