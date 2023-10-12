@@ -7,6 +7,7 @@ import org.kainos.ea.core.SalesEmployeeValidator;
 import org.kainos.ea.db.SalesEmployeeDAO;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class SalesEmployeeService {
     SalesEmployeeDAO salesEmployeeDAO = new SalesEmployeeDAO();
@@ -71,6 +72,33 @@ public class SalesEmployeeService {
             System.err.println(e.getMessage());
 
             throw new FailedToUpdateSalesEmployeeException();
+        }
+    }
+    public List<SalesEmployee> getAllSalesEmployees() throws FailedToGetAllSalesEmployeesException {
+        List<SalesEmployee> salesEmployeeList = null;
+        try {
+            salesEmployeeList = salesEmployeeDAO.getAllSalesEmployees();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToGetAllSalesEmployeesException();
+        }
+
+        return salesEmployeeList;
+    }
+    public void deleteSalesEmployee(int id) throws SalesEmployeeDoesNotExistException, FailedToDeleteSalesEmployeeException {
+        try {
+            SalesEmployee employeeToDelete = salesEmployeeDAO.getSalesEmployeeByID(id);
+
+            if (employeeToDelete == null) {
+                throw new SalesEmployeeDoesNotExistException();
+            }
+
+            salesEmployeeDAO.deleteSalesEmployee(id);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToDeleteSalesEmployeeException();
         }
     }
 }
