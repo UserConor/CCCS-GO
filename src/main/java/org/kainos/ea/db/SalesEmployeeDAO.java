@@ -52,4 +52,21 @@ public class SalesEmployeeDAO {
         }
         return null;
     }
+    public void updateSalesEmployee(int id, SalesEmployeeRequest salesEmployee) throws SQLException {
+        Connection connection = databaseConnector.getConnection();
+
+        String updateStatement = "UPDATE SalesEmployee SET Firstname = ?, Surname = ?, Salary = ?, BankNum = ?, NINum = ?, ComRate = ? WHERE CustomerID = ?";
+
+        PreparedStatement statement = connection.prepareStatement(updateStatement);
+
+        statement.setString(1, salesEmployee.getForename());
+        statement.setString(2, salesEmployee.getSurname());
+        statement.setBigDecimal(3, salesEmployee.getSalary());
+        statement.setString(4, salesEmployee.getBAN());
+        statement.setString(5, salesEmployee.getNINumber());
+        statement.setBigDecimal(6, salesEmployee.getComRate());
+        statement.setInt(7, id);
+
+        statement.executeUpdate();
+    }
 }
