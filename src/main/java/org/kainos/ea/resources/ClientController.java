@@ -55,6 +55,10 @@ public class ClientController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getClientOfHighestValue() {
         try {
+            // TODO:
+            // This should be moved to the service class
+            // It is also far too inefficient with far too many SQL queries being required
+            // This could be reworked to utilise only one SQL call in the DAO class
             HashMap<Client, Float> clientToTotalProjectValue = new HashMap<>();
             List<Client> clients = clientService.getAllClients();
             for (Client client: clients) {

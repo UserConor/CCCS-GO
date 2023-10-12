@@ -11,7 +11,7 @@ public class ClientService {
     ClientDao clientDao = new ClientDao();
 
     public List<Client> getAllClients() throws FailedToGetClientsException {
-        List<Client> clientList;
+        List<Client> clientList = null;
 
         try {
             clientList = clientDao.getAllClients();

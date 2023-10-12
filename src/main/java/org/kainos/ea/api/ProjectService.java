@@ -12,7 +12,7 @@ public class ProjectService {
     ProjectDao projectDao = new ProjectDao();
 
     public List<Project> getAllProjectsWithClient(int clientId) throws FailedToGetProjectsException {
-        List<Project> projectList;
+        List<Project> projectList = null;
 
         try {
             projectList = projectDao.getAllProjectsWithClient(clientId);
