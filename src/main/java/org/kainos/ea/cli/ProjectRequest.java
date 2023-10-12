@@ -13,15 +13,12 @@ public class ProjectRequest {
 
     @JsonCreator
     public ProjectRequest(
-
         @JsonProperty("projectId") int projectId,
         @JsonProperty("projectName") String projectName,
         @JsonProperty("projectValue") double projectValue,
         @JsonProperty("clientId") int clientId,
         @JsonProperty("techLeadId") int techLeadId,
         @JsonProperty("isCompleted") int isCompleted) {
-
-
 
         this.projectId = projectId;
         this.projectName = projectName;
