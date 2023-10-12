@@ -96,4 +96,39 @@ public class SalesEmployeeDAO {
         }
         return salesEmployeeList;
     }
+    public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
+        Connection connection = databaseConnector.getConnection();
+
+        Statement statement = connection.createStatement();
+
+        ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate FROM SalesEmployee");
+
+        List<SalesEmployee> salesEmployeeList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            SalesEmployee salesEmployee = new SalesEmployee(
+                    resultSet.getInt("SalesEmpID"),
+                    resultSet.getString("Forename"),
+                    resultSet.getString("Surname"),
+                    resultSet.getBigDecimal("Salary"),
+                    resultSet.getString("BankNum"),
+                    resultSet.getString("NINum"),
+                    resultSet.getBigDecimal("ComRate")
+            );
+
+            salesEmployeeList.add(salesEmployee);
+        }
+        return salesEmployeeList;
+    }
+    public void deleteSalesEmployee(int id) throws SQLException {
+        Connection connection = databaseConnector.getConnection();
+
+        String deleteStatement = "DELETE FROM SalesEmployee WHERE SalesEmpID = ?";
+
+        PreparedStatement statement = connection.prepareStatement(deleteStatement);
+
+        statement.setInt(1,id);
+
+        statement.executeUpdate();
+    }
 }

@@ -1,6 +1,8 @@
 package org.kainos.ea.api;
 
 import org.kainos.ea.cli.DeliveryEmployee;
+import org.kainos.ea.client.DeliveryEmployeeDoesNotExistException;
+import org.kainos.ea.client.FailedToGetDeliveryEmployeesException;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
 import org.kainos.ea.client.*;
 import org.kainos.ea.core.DeliveryEmployeeValidator;
