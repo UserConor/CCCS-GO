@@ -18,7 +18,6 @@ public class DeliveryEmployee {
     }
 
 
-
     public int getDEmpID() {
         return DEmpID;
     }
@@ -66,7 +65,6 @@ public class DeliveryEmployee {
     public void setNINum(String NINum) {
         this.NINum = NINum;
     }
-
 
 
 }
