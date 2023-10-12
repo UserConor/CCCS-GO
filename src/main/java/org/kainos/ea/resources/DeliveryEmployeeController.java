@@ -19,7 +19,7 @@ public class DeliveryEmployeeController {
         private DeliveryEmployeeService deliveryEmployeeService = new DeliveryEmployeeService();
 
         @GET
-        @Path("/deliveryemployees")
+        @Path("/deliveryemployees/")
         @Produces(MediaType.APPLICATION_JSON)
         public Response getAllDeliveryEmployees() {
             try {
