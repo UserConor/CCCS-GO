@@ -2,6 +2,12 @@ package org.kainos.ea.resources;
 
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.DeliveryEmployeeService;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
 import org.kainos.ea.client.DeliveryEmployeeDoesNotExistException;
 import org.kainos.ea.client.FailedToCreateDeliveryEmployeeException;
@@ -9,6 +15,7 @@ import org.kainos.ea.client.FailedToGetDeliveryEmployeesException;
 import org.kainos.ea.client.InvalidDeliveryEmployeeException;
 
 import javax.ws.rs.*;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -19,7 +26,7 @@ public class DeliveryEmployeeController {
         private DeliveryEmployeeService deliveryEmployeeService = new DeliveryEmployeeService();
 
         @GET
-        @Path("/deliveryemployees")
+        @Path("/delivery-employees")
         @Produces(MediaType.APPLICATION_JSON)
         public Response getAllDeliveryEmployees() {
             try {
@@ -33,7 +40,7 @@ public class DeliveryEmployeeController {
 
 
     @GET
-    @Path("/deliveryemployees/{id}")
+    @Path("/delivery-employees/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDeliveryEmployeeById(@PathParam("id") int id) {
         try {
@@ -49,9 +56,8 @@ public class DeliveryEmployeeController {
         }
     }
 
-
     @POST
-    @Path("/deliveryemployees")
+    @Path("/delivery-employees")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) {
         try {
