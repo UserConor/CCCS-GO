@@ -21,6 +21,10 @@ public class Client {
         this.salesEmpId = salesEmpId;
     }
 
+    public Client(int clientID) {
+
+    }
+
     public int getClientId() {
         return clientId;
     }

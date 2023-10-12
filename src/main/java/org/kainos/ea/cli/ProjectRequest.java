@@ -1,24 +1,34 @@
 package org.kainos.ea.cli;
 
-public class Project {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class ProjectRequest {
     private int projectId;
     private String projectName;
-    private float projectValue;
+    private double projectValue;
     private int clientId;
     private int techLeadId;
-    private boolean isCompleted;
+    private int isCompleted;
 
-    public Project(int projectId, String projectName, float projectValue,
-                   int clientId, int techLeadId, boolean isCompleted) {
+    @JsonCreator
+    public ProjectRequest(
+
+        @JsonProperty("projectId") int projectId,
+        @JsonProperty("projectName") String projectName,
+        @JsonProperty("projectValue") double projectValue,
+        @JsonProperty("clientId") int clientId,
+        @JsonProperty("techLeadId") int techLeadId,
+        @JsonProperty("isCompleted") int isCompleted) {
+
+
+
         this.projectId = projectId;
         this.projectName = projectName;
         this.projectValue = projectValue;
         this.clientId = clientId;
         this.techLeadId = techLeadId;
         this.isCompleted = isCompleted;
-    }
-
-    public Project(int projectID) {
     }
 
     public int getProjectId() {
@@ -37,11 +47,11 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public float getProjectValue() {
+    public double getProjectValue() {
         return projectValue;
     }
 
-    public void setProjectValue(float projectValue) {
+    public void setProjectValue(double projectValue) {
         this.projectValue = projectValue;
     }
 
@@ -61,11 +71,12 @@ public class Project {
         this.techLeadId = techLeadId;
     }
 
-    public boolean isCompleted() {
+    public int getIsCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(boolean completed) {
-        isCompleted = completed;
+    public void setIsCompleted(int isCompleted) {
+        this.isCompleted = isCompleted;
     }
+
 }
