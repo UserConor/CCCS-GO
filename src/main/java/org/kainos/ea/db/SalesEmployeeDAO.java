@@ -55,6 +55,7 @@ public class SalesEmployeeDAO {
         }
         return null;
     }
+
     public void updateSalesEmployee(int id, SalesEmployeeRequest salesEmployee) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
@@ -72,6 +73,7 @@ public class SalesEmployeeDAO {
 
         statement.executeUpdate();
     }
+
     public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
@@ -96,6 +98,7 @@ public class SalesEmployeeDAO {
         }
         return salesEmployeeList;
     }
+    
     public void deleteSalesEmployee(int id) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 

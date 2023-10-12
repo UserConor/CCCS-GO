@@ -16,18 +16,18 @@ public class DeliveryEmployeeDao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT DEmpID, Forename, Surname, Salary, BankNum, NINum FROM `DeliveryEmployee`;");
+        ResultSet resultSet = st.executeQuery("SELECT DEmpID, Forename, Surname, Salary, BankNum, NINum FROM `DeliveryEmployee`;");
 
         List<DeliveryEmployee> deliveryEmployeeList = new ArrayList<>();
 
-        while (rs.next()) {
+        while (resultSet.next()) {
             DeliveryEmployee deliveryEmployee = new DeliveryEmployee(
-                    rs.getInt("DEmpID"),
-                    rs.getString("Forename"),
-                    rs.getString("Surname"),
-                    rs.getDouble("Salary"),
-                    rs.getString("BankNum"),
-                    rs.getString("NINum")
+                    resultSet.getInt("DEmpID"),
+                    resultSet.getString("Forename"),
+                    resultSet.getString("Surname"),
+                    resultSet.getDouble("Salary"),
+                    resultSet.getString("BankNum"),
+                    resultSet.getString("NINum")
             );
 
             deliveryEmployeeList.add(deliveryEmployee);
