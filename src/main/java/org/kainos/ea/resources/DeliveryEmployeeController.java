@@ -17,7 +17,7 @@ public class DeliveryEmployeeController {
         private DeliveryEmployeeService deliveryEmployeeService = new DeliveryEmployeeService();
 
         @GET
-        @Path("/deliveryEmployees")
+        @Path("/delivery-employees")
         @Produces(MediaType.APPLICATION_JSON)
         public Response getAllDeliveryEmployees() {
             try {
@@ -31,7 +31,7 @@ public class DeliveryEmployeeController {
 
 
     @GET
-    @Path("/deliveryEmployees/{id}")
+    @Path("/delivery-employees/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDeliveryEmployeeById(@PathParam("id") int id) {
         try {
@@ -49,7 +49,7 @@ public class DeliveryEmployeeController {
 
 
     @POST
-    @Path("/deliveryEmployees/")
+    @Path("/delivery-employees/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) {
         try {
@@ -67,7 +67,7 @@ public class DeliveryEmployeeController {
     }
 
     @PUT
-    @Path("/deliveryEmployees/{id}")
+    @Path("/delivery-employees/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateProduct(@PathParam("id") int id, DeliveryEmployeeUpdateRequest deliveryEmployeeUpdate) {
         try{
