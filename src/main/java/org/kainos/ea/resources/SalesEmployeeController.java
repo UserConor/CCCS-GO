@@ -3,10 +3,7 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.SalesEmployeeService;
 import org.kainos.ea.cli.SalesEmployeeRequest;
-import org.kainos.ea.client.FailedToCreateSalesEmployeeException;
-import org.kainos.ea.client.FailedToGetSalesEmployeeException;
-import org.kainos.ea.client.InvalidSalesEmployeeException;
-import org.kainos.ea.client.SalesEmployeeDoesNotExistException;
+import org.kainos.ea.client.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -49,6 +46,26 @@ public class SalesEmployeeController {
             return Response.serverError().build();
         }
         catch (SalesEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
+    @PUT
+    @Path("/sales-employees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateSalesEmployee(@PathParam("id") int id,SalesEmployeeRequest salesEmployee) {
+        try {
+            salesEmployeeService.updateSalesEmployee(id, salesEmployee);
+
+            return Response.ok().build();
+        }
+        catch (FailedToUpdateSalesEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+        catch (SalesEmployeeDoesNotExistException | InvalidSalesEmployeeException e) {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).build();
