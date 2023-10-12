@@ -3,12 +3,9 @@ package org.kainos.ea.resources;
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.SalesEmployeeService;
 import org.kainos.ea.cli.SalesEmployeeRequest;
-import org.kainos.ea.client.FailedToCreateSalesEmployeeException;
-import org.kainos.ea.client.InvalidSalesEmployeeException;
+import org.kainos.ea.client.*;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -33,6 +30,45 @@ public class SalesEmployeeController {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/sales-employees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSalesEmployeeById(@PathParam("id") int id) {
+        try {
+            return Response.ok(salesEmployeeService.getSalesEmployeeById(id)).build();
+        }
+        catch (FailedToGetSalesEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+        catch (SalesEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
+    @PUT
+    @Path("/sales-employees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateSalesEmployee(@PathParam("id") int id,SalesEmployeeRequest salesEmployee) {
+        try {
+            salesEmployeeService.updateSalesEmployee(id, salesEmployee);
+
+            return Response.ok().build();
+        }
+        catch (FailedToUpdateSalesEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+        catch (SalesEmployeeDoesNotExistException | InvalidSalesEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 }
