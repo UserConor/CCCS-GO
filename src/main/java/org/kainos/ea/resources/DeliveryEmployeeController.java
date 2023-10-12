@@ -2,10 +2,17 @@ package org.kainos.ea.resources;
 
 import io.swagger.annotations.Api;
 import org.kainos.ea.api.DeliveryEmployeeService;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
 import org.kainos.ea.client.*;
 
 import javax.ws.rs.*;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -13,20 +20,20 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class DeliveryEmployeeController {
 
-        private DeliveryEmployeeService deliveryEmployeeService = new DeliveryEmployeeService();
+    private DeliveryEmployeeService deliveryEmployeeService = new DeliveryEmployeeService();
 
-        @GET
-        @Path("/delivery-employees/")
-        @Produces(MediaType.APPLICATION_JSON)
-        public Response getAllDeliveryEmployees() {
-            try {
-                return Response.ok(deliveryEmployeeService.getAllDeliveryEmployees()).build();
-            } catch (FailedToGetDeliveryEmployeesException e) {
-                System.err.println(e.getMessage());
+    @GET
+    @Path("/delivery-employees/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllDeliveryEmployees() {
+       try {
+           return Response.ok(deliveryEmployeeService.getAllDeliveryEmployees()).build();
+       } catch (FailedToGetDeliveryEmployeesException e) {
+           System.err.println(e.getMessage());
 
-                return Response.serverError().build();
-            }
-        }
+           return Response.serverError().build();
+       }
+    }
 
 
     @GET
@@ -45,7 +52,6 @@ public class DeliveryEmployeeController {
             return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), "Delivery employee does not exist").build();
         }
     }
-
 
     @POST
     @Path("/delivery-employees")
