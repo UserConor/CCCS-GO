@@ -1,6 +1,9 @@
 package org.kainos.ea.db;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.kainos.ea.cli.SalesEmployeeRequest;
 import org.kainos.ea.cli.SalesEmployee;
 
@@ -68,5 +71,29 @@ public class SalesEmployeeDAO {
         statement.setInt(7, id);
 
         statement.executeUpdate();
+    }
+    public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
+        Connection connection = databaseConnector.getConnection();
+
+        Statement statement = connection.createStatement();
+
+        ResultSet resultSet = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate FROM SalesEmployee");
+
+        List<SalesEmployee> salesEmployeeList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            SalesEmployee salesEmployee = new SalesEmployee(
+                    resultSet.getInt("SalesEmpID"),
+                    resultSet.getString("Forename"),
+                    resultSet.getString("Surname"),
+                    resultSet.getBigDecimal("Salary"),
+                    resultSet.getString("BankNum"),
+                    resultSet.getString("NINum"),
+                    resultSet.getBigDecimal("ComRate")
+            );
+
+            salesEmployeeList.add(salesEmployee);
+        }
+        return salesEmployeeList;
     }
 }
