@@ -1,16 +1,15 @@
 package org.kainos.ea.db;
 
-import org.kainos.ea.cli.Client;
 import org.kainos.ea.cli.Project;
+import org.kainos.ea.cli.ProjectRequestClient;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDao {
+    private DatabaseConnector databaseConnector = new DatabaseConnector();
+
     public List<Project> getAllProjectsWithClient(int clientId) throws SQLException {
         Connection connection = DatabaseConnector.getConnection();
         Statement statement = connection.createStatement();
@@ -37,4 +36,37 @@ public class ProjectDao {
 
         return projectList;
     }
+
+    public Project getProjectById(int id) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT ProjectID" +
+                " FROM Project WHERE ProjectID=" + id);
+
+
+        while (rs.next()) {
+            return new Project(
+                    rs.getInt("ProjectID")
+            );
+
+        }
+
+        return null;
+    }
+
+    public void updateProjectClient(int id, ProjectRequestClient project) throws SQLException {
+        Connection connection = databaseConnector.getConnection();
+
+        String updateStatement = "UPDATE Project SET ClientID = ? WHERE ProjectID = ?";
+
+        PreparedStatement st = connection.prepareStatement(updateStatement);
+
+        st.setInt(1, project.getClientId());
+        st.setInt(2, id);
+
+        st.executeUpdate();
+    }
+
 }
