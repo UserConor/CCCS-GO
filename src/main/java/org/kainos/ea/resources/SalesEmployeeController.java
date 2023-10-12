@@ -54,4 +54,22 @@ public class SalesEmployeeController {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
+    @PUT
+    @Path("/sales-employees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateSalesEmployee(@PathParam("id") int id) {
+        try {
+            return Response.ok(salesEmployeeService.getSalesEmployeeById(id)).build();
+        }
+        catch (FailedToGetSalesEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+        catch (SalesEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
 }
