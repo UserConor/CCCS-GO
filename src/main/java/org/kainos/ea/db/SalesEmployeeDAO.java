@@ -55,6 +55,7 @@ public class SalesEmployeeDAO {
         }
         return null;
     }
+
     public void updateSalesEmployee(int id, SalesEmployeeRequest salesEmployee) throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
@@ -72,12 +73,13 @@ public class SalesEmployeeDAO {
 
         s.executeUpdate();
     }
+
     public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
         Connection connection = databaseConnector.getConnection();
 
-        Statement s = connection.createStatement();
+        Statement statement = connection.createStatement();
 
-        ResultSet rs = s.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate FROM SalesEmployee");
+        ResultSet rs = statement.executeQuery("SELECT SalesEmpID, Forename, Surname, Salary, BankNum, NINum, ComRate FROM SalesEmployee");
 
         List<SalesEmployee> salesEmployeeList = new ArrayList<>();
 
@@ -95,5 +97,17 @@ public class SalesEmployeeDAO {
             salesEmployeeList.add(salesEmployee);
         }
         return salesEmployeeList;
+    }
+    
+    public void deleteSalesEmployee(int id) throws SQLException {
+        Connection connection = databaseConnector.getConnection();
+
+        String deleteStatement = "DELETE FROM SalesEmployee WHERE SalesEmpID = ?";
+
+        PreparedStatement statement = connection.prepareStatement(deleteStatement);
+
+        statement.setInt(1,id);
+
+        statement.executeUpdate();
     }
 }
