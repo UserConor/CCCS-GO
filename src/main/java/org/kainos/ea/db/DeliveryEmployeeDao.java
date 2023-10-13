@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
+import org.kainos.ea.cli.DeliveryEmployeeUpdateRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -86,6 +87,20 @@ public class DeliveryEmployeeDao {
         return -1;
     }
 
+
+    public void updateDeliveryEmployee(int id, DeliveryEmployeeUpdateRequest deliveryEmployeeUpdate) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        String updateStatement = "UPDATE DeliveryEmployee SET ForeName = ?, Surname = ?, Salary = ?, BankNum = ? WHERE DEmpID = ?";
+
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setString(1, deliveryEmployeeUpdate.getForename());
+        st.setString(2, deliveryEmployeeUpdate.getSurname());
+        st.setDouble(3, deliveryEmployeeUpdate.getSalary());
+        st.setString(4, deliveryEmployeeUpdate.getBankNum());
+        st.setInt(5, id);
+    }
 
     public void deleteDeliveryEmployee(int id) throws SQLException {
         Connection c = databaseConnector.getConnection();

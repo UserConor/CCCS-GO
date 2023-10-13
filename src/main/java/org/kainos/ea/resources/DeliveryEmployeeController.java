@@ -9,6 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
+import org.kainos.ea.cli.DeliveryEmployeeUpdateRequest;
 import org.kainos.ea.client.*;
 
 import javax.ws.rs.*;
@@ -54,7 +55,7 @@ public class DeliveryEmployeeController {
     }
 
     @POST
-    @Path("/delivery-employees")
+    @Path("/delivery-employees/")
     @Produces(MediaType.APPLICATION_JSON)
     public Response createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) {
         try {
@@ -89,4 +90,24 @@ public class DeliveryEmployeeController {
             return Response.serverError().build();
         }
     }
+
+    @PUT
+    @Path("/delivery-employees/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateProduct(@PathParam("id") int id, DeliveryEmployeeUpdateRequest deliveryEmployeeUpdate) {
+        try{
+            deliveryEmployeeService.updateDeliveryEmployee(id, deliveryEmployeeUpdate);
+
+            return Response.ok().build();
+        } catch (InvalidDeliveryEmployeeException | DeliveryEmployeeDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FailedToUpdateDeliveryEmployeeException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        }
+    }
+
 }

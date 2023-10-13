@@ -2,6 +2,7 @@ package org.kainos.ea.api;
 
 import org.kainos.ea.cli.DeliveryEmployee;
 import org.kainos.ea.cli.DeliveryEmployeeRequest;
+import org.kainos.ea.cli.DeliveryEmployeeUpdateRequest;
 import org.kainos.ea.client.*;
 import org.kainos.ea.core.DeliveryEmployeeValidator;
 import org.kainos.ea.db.DeliveryEmployeeDao;
@@ -42,7 +43,8 @@ public class DeliveryEmployeeService {
         }
     }
 
-    public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws FailedToCreateDeliveryEmployeeException, InvalidDeliveryEmployeeException {
+  
+    public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws InvalidDeliveryEmployeeException, FailedToCreateDeliveryEmployeeException, InvalidDeliveryEmployeeException {
         try {
             String validation = deliveryEmployeeValidator.isValidDeliveryEmployee(deliveryEmployee);
 
@@ -64,6 +66,29 @@ public class DeliveryEmployeeService {
         }
     }
 
+  
+    public void updateDeliveryEmployee(int id, DeliveryEmployeeUpdateRequest deliveryEmployeeUpdate) throws InvalidDeliveryEmployeeException, FailedToUpdateDeliveryEmployeeException, DeliveryEmployeeDoesNotExistException {
+        try {
+            String validation = deliveryEmployeeValidator.isValidDeliveryEmployeeUpdate(deliveryEmployeeUpdate);
+
+            if (validation != null) {
+                throw new InvalidDeliveryEmployeeException(validation);
+            }
+
+            DeliveryEmployee deliveryEmployeeToUpdate = deliveryEmployeeDao.getDeliveryEmployeeById(id);
+
+            if (deliveryEmployeeToUpdate == null) {
+                throw new DeliveryEmployeeDoesNotExistException();
+            }
+
+            deliveryEmployeeDao.updateDeliveryEmployee(id, deliveryEmployeeUpdate);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+            throw new FailedToUpdateDeliveryEmployeeException();
+        }
+    }
+
 
     public void deleteDeliveryEmployee(int id) throws DeliveryEmployeeDoesNotExistException, FailedToDeleteDeliveryEmployeeException {
         try {
@@ -78,6 +103,7 @@ public class DeliveryEmployeeService {
             System.err.println(e.getMessage());
 
             throw new FailedToDeleteDeliveryEmployeeException();
+
         }
     }
 }

@@ -1,8 +1,7 @@
 package org.kainos.ea.client;
 
-public class InvalidDeliveryEmployeeException extends Exception {
+public class InvalidDeliveryEmployeeException extends Throwable {
+    public InvalidDeliveryEmployeeException(String validation) { super(validation); }
 
-    public InvalidDeliveryEmployeeException(String error) {
-        super(error);
-    }
+
 }
